@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="NotBloxzz — Roblox gaming, Rivals challenges, edits and community.">
+  <title>NotBloxzz — 3D Gaming Portfolio</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: rgba(20, 12, 14, .72);
+      --red: #ff2638;
+      --red2: #a90016;
+      --text: #f8f5f5;
+      --muted: #a7a0a2;
+      --line: rgba(255, 45, 62, .24);
+      --mx: 50%;
+      --my: 50%;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0; color: var(--text); background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -3; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 75% 20%, rgba(135, 0, 18, .24), transparent 38%),
+        radial-gradient(ellipse at 10% 75%, rgba(255, 20, 40, .10), transparent 32%),
+        linear-gradient(140deg, #090909 0%, #100709 48%, #050505 100%);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; opacity: .15;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .cursor-glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background: radial-gradient(500px circle at var(--mx) var(--my), rgba(255, 25, 49, .08), transparent 55%);
+    }
+    .topline { height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); }
+    .nav-wrap { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(18px); background: rgba(8,8,8,.76); border-bottom: 1px solid rgba(255,255,255,.07); }
+    nav { width: min(1120px, calc(100% - 40px)); height: 76px; margin: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-size: 1.12rem; font-weight: 850; letter-spacing: -.04em; }
+    .brand img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 1px solid var(--red); box-shadow: 0 0 18px #ff26383b; }
+    .brand span span { color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: .84rem; color: #c6bec0; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta { border: 1px solid rgba(255,38,56,.55); padding: 10px 16px; border-radius: 999px; color: #fff !important; background: rgba(255,38,56,.08); }
+    .nav-cta:hover { background: var(--red); box-shadow: 0 0 24px #ff263844; }
+    .menu-btn { display: none; background: none; border: 1px solid var(--line); color: white; padding: 9px 12px; border-radius: 10px; }
+    main { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .hero { min-height: calc(100svh - 78px); display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 54px; padding: 66px 0 84px; perspective: 1200px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: #ff8790; text-transform: uppercase; letter-spacing: .18em; font-size: .72rem; font-weight: 750; }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--red); box-shadow: 0 0 13px var(--red); animation: pulse 1.7s infinite; }
+    h1 { font-size: clamp(3.5rem, 8vw, 6.8rem); letter-spacing: -.085em; line-height: .9; margin: 25px 0 24px; font-weight: 950; }
+    h1 .outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.8); }
+    h1 .red { color: var(--red); text-shadow: 0 0 38px rgba(255,0,30,.23); }
+    .intro { color: #b6afb1; font-size: 1.03rem; line-height: 1.8; max-width: 500px; }
+    .intro strong { color: white; font-weight: 650; }
+    .actions { display: flex; gap: 13px; flex-wrap: wrap; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 19px; border-radius: 12px; font-size: .9rem; font-weight: 800; border: 1px solid transparent; transition: transform .25s, box-shadow .25s, background .25s; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-primary { background: linear-gradient(135deg, #ff3445, #bd001b); box-shadow: 0 9px 30px #ff263826, inset 0 1px 0 #ffffff48; }
+    .btn-primary:hover { box-shadow: 0 12px 38px #ff26385c; }
+    .btn-secondary { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.035); }
+    .btn-secondary:hover { border-color: var(--red); background: #ff263810; }
+    .meta { display: flex; align-items: center; gap: 18px; margin-top: 34px; color: #777174; font-size: .76rem; }
+    .meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .meta b { color: #f5eeee; font-weight: 700; }
+    .meta .dot { width: 3px; height: 3px; background: #51474a; border-radius: 50%; }
+    .visual { min-height: 470px; position: relative; display: grid; place-items: center; isolation: isolate; }
+    .orb { position: absolute; width: min(420px, 95%); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #ff293b 0%, #7d0012 24%, #1a070a 57%, #080808 72%); filter: drop-shadow(0 0 42px #ff10232b); animation: float 7s ease-in-out infinite; }
+    .orb::before { content: ""; position: absolute; inset: -15px; border-radius: 50%; border: 1px solid rgba(255,54,73,.35); transform: rotateX(68deg) rotateZ(-20deg); box-shadow: 0 0 30px #ff102318; }
+    .orb::after { content: ""; position: absolute; inset: 13px; border-radius: 50%; border: 1px dashed rgba(255,100,112,.3); transform: rotateX(68deg) rotateZ(30deg); }
+    .avatar-card {
+      position: relative; z-index: 2; width: min(370px, 85%); aspect-ratio: 1 / 1.08;
+      display: grid; place-items: center; transform-style: preserve-3d; transform: rotateY(-9deg) rotateX(4deg);
+      transition: transform .15s ease-out; border: 1px solid rgba(255,67,83,.4); border-radius: 30px;
+      background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.015) 45%, rgba(255,0,30,.07));
+      box-shadow: 22px 28px 70px #000b, 0 0 55px #ff00151b, inset 0 1px 0 #ffffff26; overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+    .avatar-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 20%, #ffffff13 36%, transparent 50%); transform: translateX(-120%); animation: shine 6s ease-in-out infinite; }
+    .avatar-card img { width: 94%; height: 94%; object-fit: contain; filter: drop-shadow(0 15px 28px #000); transform: translateZ(45px); }
+    .floating-tag { position: absolute; z-index: 4; padding: 11px 14px; border: 1px solid rgba(255,64,80,.35); background: rgba(12,8,9,.82); backdrop-filter: blur(14px); border-radius: 12px; box-shadow: 0 12px 35px #0008; font-size: .76rem; font-weight: 750; }
+    .floating-tag small { display: block; color: #8d8285; font-size: .63rem; margin-bottom: 4px; font-weight: 600; }
+    .tag-top { top: 11%; right: -2%; animation: bob 5s ease-in-out infinite; }
+    .tag-bottom { bottom: 10%; left: -1%; animation: bob 5s ease-in-out infinite reverse; }
+    .spark { position: absolute; width: 5px; height: 5px; background: #ff4355; border-radius: 50%; box-shadow: 0 0 15px 3px #ff2638; }
+    .s1 { top: 16%; left: 12%; } .s2 { right: 12%; bottom: 20%; width: 3px; height: 3px; }
+    .section { padding: 85px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+    .kicker { color: var(--red); text-transform: uppercase; letter-spacing: .18em; font-size: .7rem; font-weight: 800; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1; letter-spacing: -.06em; margin: 12px 0 0; }
+    .section-head p { color: var(--muted); max-width: 400px; line-height: 1.7; font-size: .9rem; margin: 0; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { position: relative; padding: 25px; border: 1px solid rgba(255,255,255,.09); border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015)); min-height: 190px; transform-style: preserve-3d; transition: border-color .25s, background .25s, transform .25s; overflow: hidden; }
+    .card::after { content: ""; position: absolute; width: 150px; height: 150px; border-radius: 50%; background: #ff26380d; filter: blur(35px); right: -70px; bottom: -80px; pointer-events: none; }
+    .card:hover { border-color: rgba(255,38,56,.45); background: linear-gradient(145deg, rgba(255,38,56,.09), rgba(255,255,255,.02)); }
+    .card-icon { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid #ff26384d; background: #ff263811; color: var(--red); border-radius: 13px; margin-bottom: 23px; }
+    .card h3 { margin: 0 0 9px; font-size: 1.05rem; }
+    .card p { color: var(--muted); line-height: 1.7; margin: 0; font-size: .86rem; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 20px; }
+    .about-panel, .contact-panel { border: 1px solid rgba(255,255,255,.09); background: var(--panel); border-radius: 22px; padding: 30px; }
+    .about-panel p { color: var(--muted); line-height: 1.8; font-size: .93rem; }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+    .stat { border: 1px solid rgba(255,255,255,.08); padding: 16px; border-radius: 14px; background: #ffffff04; }
+    .stat strong { display: block; color: var(--red); font-size: 1.2rem; margin-bottom: 4px; }
+    .stat span { color: #8e8588; font-size: .74rem; }
+    .social-list { display: grid; gap: 12px; }
+    .social { display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.025); border-radius: 14px; padding: 15px 17px; transition: .2s; }
+    .social:hover { border-color: var(--line); transform: translateX(3px); }
+    .social .left { display: flex; align-items: center; gap: 12px; }
+    .social .icon { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: #ff263815; color: var(--red); font-weight: 900; }
+    .social strong { display: block; font-size: .88rem; }
+    .social small { color: var(--muted); font-size: .75rem; }
+    .arrow { color: #8f8588; }
+    .contact-panel { text-align: center; padding: 42px 24px; background: radial-gradient(ellipse at 50% 0%, #ff263813, transparent 65%), rgba(255,255,255,.02); }
+    .contact-panel p { color: var(--muted); margin: 14px 0 24px; }
+    .email { display: inline-block; color: #ff6674; font-weight: 750; overflow-wrap: anywhere; }
+    footer { border-top: 1px solid rgba(255,255,255,.08); padding: 25px 20px; color: #7f777a; font-size: .76rem; }
+    .footer-inner { width: min(1120px, 100%); margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a:hover { color: var(--red); }
+    .subscribe { position: fixed; right: 22px; bottom: 22px; z-index: 40; display: inline-flex; align-items: center; gap: 9px; padding: 13px 17px; border-radius: 999px; border: 1px solid #ff9aa4; background: linear-gradient(135deg, #ff3547, #a90017); box-shadow: 0 8px 35px #ff001c42, inset 0 1px 0 #ffffff55; font-size: .8rem; font-weight: 900; transition: transform .2s; }
+    .subscribe:hover { transform: translateY(-4px) scale(1.03); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes pulse { 50% { opacity: .35; box-shadow: 0 0 4px var(--red); } }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes shine { 0%,65%,100% { transform: translateX(-120%); } 82% { transform: translateX(120%); } }
+    @media (max-width: 800px) {
+      nav { height: 68px; }
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 68px; left: 20px; right: 20px; padding: 18px; flex-direction: column; align-items: stretch; gap: 18px; border: 1px solid var(--line); border-radius: 16px; background: rgba(9,8,9,.97); }
+      .nav-links.open { display: flex; }
+      .nav-cta { text-align: center; }
+      .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 60px; text-align: center; }
+      .intro { margin-inline: auto; }
+      .actions, .meta { justify-content: center; }
+      .visual { min-height: 400px; grid-row: 1; }
+      .orb { width: min(350px, 82vw); }
+      .avatar-card { width: min(310px, 76vw); }
+      .tag-top { right: 2%; } .tag-bottom { left: 1%; }
+      .section-head { align-items: start; flex-direction: column; }
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: auto; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      main { width: min(100% - 28px, 1120px); }
+      nav { width: calc(100% - 28px); }
+      h1 { font-size: clamp(3.2rem, 16vw, 4.5rem); }
+      .visual { min-height: 340px; }
+      .floating-tag { font-size: .68rem; padding: 9px 11px; }
+      .actions .btn { width: 100%; }
+      .meta { gap: 10px; flex-wrap: wrap; }
+      .section { padding: 62px 0; }
+      .about-panel { padding: 22px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .subscribe { right: 12px; bottom: 12px; padding: 11px 14px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="topline"></div>
+  <div class="nav-wrap">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="NotBloxzz home">
+        <img src="logo.jpg" alt="NotBloxzz logo" onerror="this.style.display='none'">
+        <span>Not<span>Bloxzz</span></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#content">Content</a>
+        <a href="https://discord.gg/pXg4FhFGs" target="_blank" rel="noopener noreferrer">Discord ↗</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> Roblox creator · Nepal</div>
+        <h1>NOT<br><span class="red">BLOXZZ</span><br><span class="outline">UNIVERSE.</span></h1>
+        <p class="intro">Gaming, wild challenges, and <strong>next-level Roblox RIVALS moments.</strong> Welcome to the universe — stay sharp, enjoy the chaos, and join the community.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://www.youtube.com/@NotBloxz1" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+            Watch on YouTube
+          </a>
+          <a class="btn btn-secondary" href="https://discord.gg/pXg4FhFGs" target="_blank" rel="noopener noreferrer">Join Discord <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="meta">
+          <span><span class="pulse"></span><b>Creator mode: ON</b></span><span class="dot"></span>
+          <span>RIVALS · Roblox</span>
+        </div>
+      </div>
+
+      <div class="visual" id="visual">
+        <div class="orb" aria-hidden="true"></div>
+        <span class="spark s1" aria-hidden="true"></span><span class="spark s2" aria-hidden="true"></span>
+        <div class="avatar-card" id="avatarCard">
+          <img src="logo.jpg" alt="NotBloxzz red-and-black Roblox avatar" onerror="this.style.opacity='.15'; this.alt='Add your logo.jpg avatar image beside this HTML file'">
+        </div>
+        <div class="floating-tag tag-top"><small>PLAYER PROFILE</small>NOTBLOXZZ <span style="color:#ff4052">✦</span></div>
+        <div class="floating-tag tag-bottom"><small>MAIN GAME</small>ROBLOX / RIVALS</div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="content">
+      <div class="section-head">
+        <div><div class="kicker">What you'll find here</div><h2>Built for the <span style="color:var(--red)">clutch.</span></h2></div>
+        <p>Fast plays, fun challenges, and a community that keeps the energy alive.</p>
+      </div>
+      <div class="cards">
+        <article class="card tilt">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m8 5 11 7-11 7V5Z"/></svg></div>
+          <h3>Gaming Videos</h3><p>Roblox RIVALS gameplay, sniper-only runs, clutch moments, and challenges.</p>
+        </article>
+        <article class="card tilt">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></div>
+          <h3>Edits & Highlights</h3><p>Red-hot edits, clean shots, memorable plays, and high-energy gaming moments.</p>
+        </article>
+        <article class="card tilt">
+          <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-3.5-.8L4 20l1.2-3.5A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg></div>
+          <h3>Community</h3><p>Join the Discord, meet other players, share your clips, and be part of the squad.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="about">
+      <div class="section-head">
+        <div><div class="kicker">A little about me</div><h2>Small setup.<br>Big <span style="color:var(--red)">energy.</span></h2></div>
+        <p>One goal: make gaming content that's fun to watch and even better to be part of.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-panel">
+          <div class="eyebrow"><span class="pulse"></span> The creator</div>
+          <p>I'm NotBloxzz — a gaming creator sharing Roblox RIVALS gameplay, challenges, edits, and community moments. If you like sniper plays, intense rounds, and a red-and-black vibe, you're in the right place.</p>
+          <div class="stat-grid">
+            <div class="stat"><strong>RIVALS</strong><span>Main content</span></div>
+            <div class="stat"><strong>RED × BLACK</strong><span>Signature style</span></div>
+          </div>
+        </div>
+        <div class="about-panel">
+          <div class="kicker" style="margin-bottom:18px">Find me online</div>
+          <div class="social-list">
+            <a class="social" href="https://www.youtube.com/@NotBloxz1" target="_blank" rel="noopener noreferrer"><span class="left"><span class="icon">▶</span><span><strong>YouTube</strong><small>@NotBloxz1 · Videos & streams</small></span></span><span class="arrow">↗</span></a>
+            <a class="social" href="https://discord.gg/pXg4FhFGs" target="_blank" rel="noopener noreferrer"><span class="left"><span class="icon">⌘</span><span><strong>Discord</strong><small>Join the community</small></span></span><span class="arrow">↗</span></a>
+            <a class="social" href="https://www.youtube.com/@NotBloxz1" target="_blank" rel="noopener noreferrer"><span class="left"><span class="icon">✦</span><span><strong>New uploads</strong><small>Catch the latest content on YouTube</small></span></span><span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="contact">
+      <div class="contact-panel">
+        <div class="kicker">Let's work together</div>
+        <h2>Have a project in mind?</h2>
+        <p>For sponsorships, collaborations, and business inquiries.</p>
+        <a class="email" href="mailto:neherskhatri1@gmail.com">neherskhatri1@gmail.com</a>
+        <div style="margin-top:25px"><a class="btn btn-primary" href="mailto:neherskhatri1@gmail.com">Send a message ↗</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year">2026</span> NotBloxzz. All rights reserved.</span>
+      <div class="footer-links"><a href="https://www.youtube.com/@NotBloxz1" target="_blank" rel="noopener noreferrer">YouTube</a><a href="https://discord.gg/pXg4FhFGs" target="_blank" rel="noopener noreferrer">Discord</a><a href="#home">Back to top ↑</a></div>
+    </div>
+  </footer>
+
+  <a class="subscribe" href="https://www.youtube.com/@NotBloxz1?sub_confirmation=1" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to NotBloxzz on YouTube"><span aria-hidden="true">▶</span> SUBSCRIBE</a>
+
+  <script>
+    // Cursor glow follows the pointer on devices that support hover.
+    const root = document.documentElement;
+    window.addEventListener('pointermove', (event) => {
+      root.style.setProperty('--mx', event.clientX + 'px');
+      root.style.setProperty('--my', event.clientY + 'px');
+    }, { passive: true });
+
+    // Gentle 3D tilt for the avatar and feature cards.
+    const visual = document.getElementById('visual');
+    const avatarCard = document.getElementById('avatarCard');
+    if (visual && avatarCard && window.matchMedia('(pointer:fine)').matches) {
+      visual.addEventListener('pointermove', (event) => {
+        const rect = visual.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - .5;
+        const y = (event.clientY - rect.top) / rect.height - .5;
+        avatarCard.style.transform = `rotateY(${x * 16 - 3}deg) rotateX(${-y * 12 + 2}deg)`;
+      });
+      visual.addEventListener('pointerleave', () => {
+        avatarCard.style.transform = 'rotateY(-9deg) rotateX(4deg)';
+      });
+      document.querySelectorAll('.tilt').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - .5;
+          const y = (e.clientY - r.top) / r.height - .5;
+          card.style.transform = `perspective(700px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translateY(-3px)`;
+        });
+        card.addEventListener('pointerleave', () => card.style.transform = '');
+      });
+    }
+
+    // Reveal sections as they enter the viewport.
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Responsive mobile navigation.
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
